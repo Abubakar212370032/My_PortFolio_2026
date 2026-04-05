@@ -315,29 +315,275 @@ body {
     justify-content: center;
 }
 
-.floating-box {
-    width: 250px;
-    height: 250px;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(123, 44, 191, 0.2));
-    border: 2px solid var(--primary-color);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 120px;
-    animation: float 4s ease-in-out infinite;
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.3), inset 0 0 30px rgba(0, 212, 255, 0.1);
+/* ===== ANIMATED BOY CHARACTER ===== */
+.animated-boy {
     position: relative;
-    overflow: hidden;
+    width: 150px;
+    height: 300px;
+    animation: boyFloat 3s ease-in-out infinite;
 }
 
-.floating-box::before {
+.boy-head {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 90px;
+    background: linear-gradient(135deg, #f4a261, #e76f51);
+    border-radius: 50% 50% 45% 45%;
+    box-shadow: inset -5px 5px 10px rgba(0, 0, 0, 0.2), 0 10px 25px rgba(0, 0, 0, 0.3);
+    animation: headBob 0.6s ease-in-out infinite;
+}
+
+.boy-hair {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85px;
+    height: 50px;
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    border-radius: 50% 50% 0 0;
+    box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.boy-hair::before {
     content: '';
+    position: absolute;
+    width: 25px;
+    height: 20px;
+    background: inherit;
+    border-radius: 50%;
+    left: -20px;
+    top: 5px;
+}
+
+.boy-hair::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 20px;
+    background: inherit;
+    border-radius: 50%;
+    right: -20px;
+    top: 5px;
+}
+
+.boy-face {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, transparent 30%, rgba(0, 212, 255, 0.3) 50%, transparent 70%);
-    animation: shine 3s infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.boy-eye {
+    width: 16px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 35px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.boy-eye.left-eye {
+    left: 20px;
+}
+
+.boy-eye.right-eye {
+    right: 20px;
+}
+
+.pupil {
+    width: 8px;
+    height: 10px;
+    background: #2c3e50;
+    border-radius: 50%;
+    animation: eyeMove 2s ease-in-out infinite;
+}
+
+.left-eye .pupil {
+    animation: leftEyeMove 2s ease-in-out infinite;
+}
+
+.right-eye .pupil {
+    animation: rightEyeMove 2s ease-in-out infinite;
+}
+
+@keyframes leftEyeMove {
+    0%, 100% { transform: translateX(2px) translateY(0); }
+    25% { transform: translateX(4px) translateY(-2px); }
+    50% { transform: translateX(-2px) translateY(0); }
+    75% { transform: translateX(0) translateY(2px); }
+}
+
+@keyframes rightEyeMove {
+    0%, 100% { transform: translateX(-2px) translateY(0); }
+    25% { transform: translateX(-4px) translateY(-2px); }
+    50% { transform: translateX(2px) translateY(0); }
+    75% { transform: translateX(0) translateY(2px); }
+}
+
+.boy-mouth {
+    position: absolute;
+    bottom: 18px;
+    width: 20px;
+    height: 8px;
+    background: #d45745;
+    border-radius: 0 0 20px 20px;
+    animation: mouthSmile 1.5s ease-in-out infinite;
+}
+
+@keyframes mouthSmile {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(1.2); }
+}
+
+@keyframes headBob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+.boy-body {
+    position: absolute;
+    top: 115px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 90px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border-radius: 15px 15px 10px 10px;
+    box-shadow: inset -3px 3px 8px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: bodyBob 0.6s ease-in-out infinite;
+}
+
+.boy-chest {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes bodyBob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-8px); }
+}
+
+.boy-arm {
+    position: absolute;
+    width: 20px;
+    height: 65px;
+    background: linear-gradient(90deg, #f4a261 60%, #3498db 60%);
+    border-radius: 10px;
+    top: 125px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.boy-arm.left-arm {
+    left: 10px;
+    transform-origin: top center;
+    animation: leftArmWave 1s ease-in-out infinite;
+}
+
+.boy-arm.right-arm {
+    right: 10px;
+    transform-origin: top center;
+    animation: rightArmWave 1s ease-in-out infinite;
+}
+
+@keyframes leftArmWave {
+    0% { transform: rotateZ(-20deg); }
+    25% { transform: rotateZ(45deg); }
+    50% { transform: rotateZ(60deg); }
+    75% { transform: rotateZ(30deg); }
+    100% { transform: rotateZ(-20deg); }
+}
+
+@keyframes rightArmWave {
+    0% { transform: rotateZ(20deg); }
+    25% { transform: rotateZ(-45deg); }
+    50% { transform: rotateZ(-60deg); }
+    75% { transform: rotateZ(-30deg); }
+    100% { transform: rotateZ(20deg); }
+}
+
+.boy-leg {
+    position: absolute;
+    width: 18px;
+    height: 70px;
+    background: linear-gradient(90deg, #2c3e50 40%, #34495e 60%);
+    border-radius: 10px 10px 5px 5px;
+    top: 200px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.boy-leg.left-leg {
+    left: 48px;
+    animation: leftLegWalk 0.8s ease-in-out infinite;
+}
+
+.boy-leg.right-leg {
+    right: 48px;
+    animation: rightLegWalk 0.8s ease-in-out infinite;
+}
+
+@keyframes leftLegWalk {
+    0%, 100% { transform: rotateZ(-10deg); }
+    25% { transform: rotateZ(20deg); }
+    75% { transform: rotateZ(-25deg); }
+}
+
+@keyframes rightLegWalk {
+    0%, 100% { transform: rotateZ(10deg); }
+    25% { transform: rotateZ(-25deg); }
+    75% { transform: rotateZ(20deg); }
+}
+
+@keyframes boyFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.boy-arm::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 18px;
+    background: linear-gradient(135deg, #f4a261, #e76f51);
+    border-radius: 50% 50% 40% 40%;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.boy-leg::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 16px;
+    background: #e74c3c;
+    border-radius: 5px 5px 3px 3px;
+}
+
+/* Intense wave animation when boy is clicked */
+.animated-boy.wave-intense .boy-arm.right-arm {
+    animation: waveIntense 0.6s ease-in-out !important;
 }
 
 @keyframes float {
@@ -411,6 +657,22 @@ body {
         opacity: 0;
         transform: translateX(-50%) translateY(20px);
     }
+}
+
+/* Boy Eye Blink Animation */
+@keyframes eyeBlink {
+    0% { height: 20px; }
+    50% { height: 2px; }
+    100% { height: 20px; }
+}
+
+/* Intense Wave Animation */
+@keyframes waveIntense {
+    0% { transform: rotateZ(-30deg); }
+    25% { transform: rotateZ(60deg); }
+    50% { transform: rotateZ(70deg); }
+    75% { transform: rotateZ(40deg); }
+    100% { transform: rotateZ(-30deg); }
 }
 
 /* ===== ABOUT SECTION ===== */

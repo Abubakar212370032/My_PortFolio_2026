@@ -3,6 +3,63 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section');
 
+    // ===== BOY CHARACTER INTERACTIONS =====
+    const animatedBoy = document.querySelector('.animated-boy');
+    const boyEyes = document.querySelectorAll('.boy-eye');
+    
+    if (animatedBoy) {
+        // Make boy follow mouse movement
+        document.addEventListener('mousemove', (e) => {
+            const boyRect = animatedBoy.getBoundingClientRect();
+            const boyX = boyRect.left + boyRect.width / 2;
+            const boyY = boyRect.top + boyRect.height / 2;
+            
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            const angle = Math.atan2(mouseY - boyY, mouseX - boyX);
+            
+            // Make boy tilt slightly towards mouse
+            const tilt = (mouseX - window.innerWidth / 2) / window.innerWidth * 5;
+            animatedBoy.style.transform = `perspective(1000px) rotateY(${tilt}deg)`;
+        });
+
+        // Boy waves on click
+        animatedBoy.addEventListener('click', () => {
+            animatedBoy.classList.add('wave-intense');
+            setTimeout(() => {
+                animatedBoy.classList.remove('wave-intense');
+            }, 1000);
+        });
+
+        // Boy reacts to hover
+        animatedBoy.addEventListener('mouseenter', () => {
+            animatedBoy.style.animation = 'none';
+            void animatedBoy.offsetWidth; // Trigger reflow
+            animatedBoy.style.animation = '';
+        });
+    }
+
+    // ===== BLINK ANIMATION =====
+    function eyeBlink() {
+        if (boyEyes.length > 0) {
+            boyEyes.forEach(eye => {
+                eye.style.animation = 'eyeBlink 0.4s ease-in-out';
+            });
+            setTimeout(() => {
+                boyEyes.forEach(eye => {
+                    eye.style.animation = '';
+                });
+            }, 400);
+        }
+    }
+
+    // Random blinking every 3-5 seconds
+    setInterval(() => {
+        const randomDelay = Math.random() * 2000 + 3000;
+        setTimeout(eyeBlink, randomDelay);
+    }, 5000);
+
     // Update active navigation link on scroll
     window.addEventListener('scroll', () => {
         let current = '';
