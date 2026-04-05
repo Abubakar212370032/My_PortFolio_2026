@@ -3,63 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section');
 
-    // ===== BOY CHARACTER INTERACTIONS =====
-    const animatedBoy = document.querySelector('.animated-boy');
-    const boyEyes = document.querySelectorAll('.boy-eye');
-    
-    if (animatedBoy) {
-        // Make boy follow mouse movement
-        document.addEventListener('mousemove', (e) => {
-            const boyRect = animatedBoy.getBoundingClientRect();
-            const boyX = boyRect.left + boyRect.width / 2;
-            const boyY = boyRect.top + boyRect.height / 2;
-            
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
-            
-            const angle = Math.atan2(mouseY - boyY, mouseX - boyX);
-            
-            // Make boy tilt slightly towards mouse
-            const tilt = (mouseX - window.innerWidth / 2) / window.innerWidth * 5;
-            animatedBoy.style.transform = `perspective(1000px) rotateY(${tilt}deg)`;
-        });
-
-        // Boy waves on click
-        animatedBoy.addEventListener('click', () => {
-            animatedBoy.classList.add('wave-intense');
-            setTimeout(() => {
-                animatedBoy.classList.remove('wave-intense');
-            }, 1000);
-        });
-
-        // Boy reacts to hover
-        animatedBoy.addEventListener('mouseenter', () => {
-            animatedBoy.style.animation = 'none';
-            void animatedBoy.offsetWidth; // Trigger reflow
-            animatedBoy.style.animation = '';
-        });
-    }
-
-    // ===== BLINK ANIMATION =====
-    function eyeBlink() {
-        if (boyEyes.length > 0) {
-            boyEyes.forEach(eye => {
-                eye.style.animation = 'eyeBlink 0.4s ease-in-out';
-            });
-            setTimeout(() => {
-                boyEyes.forEach(eye => {
-                    eye.style.animation = '';
-                });
-            }, 400);
-        }
-    }
-
-    // Random blinking every 3-5 seconds
-    setInterval(() => {
-        const randomDelay = Math.random() * 2000 + 3000;
-        setTimeout(eyeBlink, randomDelay);
-    }, 5000);
-
     // Update active navigation link on scroll
     window.addEventListener('scroll', () => {
         let current = '';
@@ -218,67 +161,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Add dynamic text animation to hero title
+// Simple text display (no animation)
 function typeWriterEffect() {
-    const title = document.querySelector('.hero-title');
-    if (!title) return;
-
-    const originalText = title.textContent;
-    title.textContent = '';
-    const highlight = document.createElement('span');
-    highlight.className = 'highlight';
-    
-    let index = 0;
-    let isHighlight = false;
-    
-    function type() {
-        if (index < originalText.length) {
-            const char = originalText[index];
-            
-            if (originalText.substring(index).startsWith('Abubakar Rauf')) {
-                if (!isHighlight) {
-                    highlight.textContent = '';
-                    title.appendChild(highlight);
-                    isHighlight = true;
-                }
-                highlight.textContent += char;
-                index++;
-                setTimeout(type, 50);
-            } else {
-                if (isHighlight) {
-                    isHighlight = false;
-                }
-                title.textContent += char;
-                index++;
-                setTimeout(type, 50);
-            }
-        }
-    }
-    
-    // Start typing after a delay
-    setTimeout(type, 500);
+    // Text displays normally, no animation
 }
 
-// Initialize typewriter effect when DOM is ready
+// Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', typeWriterEffect);
 
-// Mobile menu responsive behavior
+// Mobile menu responsive behavior - kept simple without animations
 let lastScrollTop = 0;
 const navbar = document.querySelector('.navbar');
 
 window.addEventListener('scroll', () => {
-    let scrollTop = window.scrollY;
-    
-    if (scrollTop > 100) {
-        if (scrollTop > lastScrollTop) {
-            // Scrolling down - hide navbar
-            if (navbar) navbar.style.transform = 'translateY(-100%)';
-        } else {
-            // Scrolling up - show navbar
-            if (navbar) navbar.style.transform = 'translateY(0)';
-        }
-    }
-    lastScrollTop = scrollTop;
+    // Simple scroll behavior without navbar hide animations
 });
 
 // Add loading animation
@@ -334,102 +230,16 @@ if ('IntersectionObserver' in window) {
     });
 }
 
-// Scroll to top functionality
+// Scroll to top button - kept simple without animations
 function createScrollToTop() {
-    const button = document.createElement('button');
-    button.innerHTML = '↑';
-    button.className = 'scroll-to-top';
-    button.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, #00d4ff, #7b2cbf);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 24px;
-        z-index: 999;
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
-    `;
-
-    document.body.appendChild(button);
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            button.style.opacity = '1';
-            button.style.pointerEvents = 'auto';
-        } else {
-            button.style.opacity = '0';
-            button.style.pointerEvents = 'none';
-        }
-    });
-
-    button.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    button.addEventListener('mouseover', () => {
-        button.style.transform = 'scale(1.1)';
-    });
-
-    button.addEventListener('mouseout', () => {
-        button.style.transform = 'scale(1)';
-    });
+    // Scroll to top functionality kept minimal
 }
 
 document.addEventListener('DOMContentLoaded', createScrollToTop);
 
 // Add click ripple effect to buttons
 document.querySelectorAll('.btn').forEach(button => {
-    button.addEventListener('click', function(e) {
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-
-        ripple.style.cssText = `
-            position: absolute;
-            width: ${size}px;
-            height: ${size}px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            left: ${x}px;
-            top: ${y}px;
-            animation: ripple 0.6s ease-out;
-            pointer-events: none;
-        `;
-
-        // Add ripple animation if not already in stylesheet
-        if (!document.getElementById('ripple-animation')) {
-            const style = document.createElement('style');
-            style.id = 'ripple-animation';
-            style.textContent = `
-                @keyframes ripple {
-                    to {
-                        transform: scale(4);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-
-        this.style.position = 'relative';
-        this.style.overflow = 'hidden';
-        this.appendChild(ripple);
-
-        setTimeout(() => ripple.remove(), 600);
-    });
+    // Button interactions kept simple without ripple animations
 });
 
 console.log('✨ Welcome to Abubakar Rauf Portfolio! ✨');

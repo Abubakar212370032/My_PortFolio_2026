@@ -49,8 +49,8 @@ body {
 
 @keyframes slideDown {
     from {
-        transform: translateY(-100%);
-        opacity: 0;
+        transform: translateY(0);
+        opacity: 1;
     }
     to {
         transform: translateY(0);
@@ -155,12 +155,7 @@ body {
         radial-gradient(2px 2px at 90px 10px, var(--secondary-color), rgba(123, 44, 191, 0));
     background-repeat: repeat;
     background-size: 200px 200px;
-    animation: twinkle 5s infinite;
-}
-
-@keyframes twinkle {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+    opacity: 0.5;
 }
 
 .hero-content {
@@ -202,12 +197,6 @@ body {
     color: var(--primary-color);
     margin-bottom: 15px;
     font-weight: 600;
-    animation: glow 2s ease-in-out infinite;
-}
-
-@keyframes glow {
-    0%, 100% { text-shadow: 0 0 10px var(--primary-color); }
-    50% { text-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--accent-color); }
 }
 
 .hero-description {
@@ -315,291 +304,27 @@ body {
     justify-content: center;
 }
 
-/* ===== ANIMATED BOY CHARACTER ===== */
-.animated-boy {
-    position: relative;
-    width: 150px;
-    height: 300px;
-    animation: boyFloat 3s ease-in-out infinite;
+/* ===== STATIC CHARACTER ===== */
+.static-character {
+    font-size: 150px;
+    display: inline-block;
+    transform: scaleX(-1);
+    filter: drop-shadow(0 10px 30px rgba(0, 212, 255, 0.3));
+    transition: transform 0.3s ease;
 }
 
-.boy-head {
-    position: absolute;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 90px;
-    background: linear-gradient(135deg, #f4a261, #e76f51);
-    border-radius: 50% 50% 45% 45%;
-    box-shadow: inset -5px 5px 10px rgba(0, 0, 0, 0.2), 0 10px 25px rgba(0, 0, 0, 0.3);
-    animation: headBob 0.6s ease-in-out infinite;
+.hero-image:hover .static-character {
+    transform: scaleX(-1) scale(1.1);
 }
 
-.boy-hair {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 85px;
-    height: 50px;
-    background: linear-gradient(135deg, #2c3e50, #34495e);
-    border-radius: 50% 50% 0 0;
-    box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.3);
-}
 
-.boy-hair::before {
-    content: '';
-    position: absolute;
-    width: 25px;
-    height: 20px;
-    background: inherit;
-    border-radius: 50%;
-    left: -20px;
-    top: 5px;
-}
 
-.boy-hair::after {
-    content: '';
-    position: absolute;
-    width: 25px;
-    height: 20px;
-    background: inherit;
-    border-radius: 50%;
-    right: -20px;
-    top: 5px;
-}
 
-.boy-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.boy-eye {
-    width: 16px;
-    height: 20px;
-    background: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 35px;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.boy-eye.left-eye {
-    left: 20px;
-}
-
-.boy-eye.right-eye {
-    right: 20px;
-}
-
-.pupil {
-    width: 8px;
-    height: 10px;
-    background: #2c3e50;
-    border-radius: 50%;
-    animation: eyeMove 2s ease-in-out infinite;
-}
-
-.left-eye .pupil {
-    animation: leftEyeMove 2s ease-in-out infinite;
-}
-
-.right-eye .pupil {
-    animation: rightEyeMove 2s ease-in-out infinite;
-}
-
-@keyframes leftEyeMove {
-    0%, 100% { transform: translateX(2px) translateY(0); }
-    25% { transform: translateX(4px) translateY(-2px); }
-    50% { transform: translateX(-2px) translateY(0); }
-    75% { transform: translateX(0) translateY(2px); }
-}
-
-@keyframes rightEyeMove {
-    0%, 100% { transform: translateX(-2px) translateY(0); }
-    25% { transform: translateX(-4px) translateY(-2px); }
-    50% { transform: translateX(2px) translateY(0); }
-    75% { transform: translateX(0) translateY(2px); }
-}
-
-.boy-mouth {
-    position: absolute;
-    bottom: 18px;
-    width: 20px;
-    height: 8px;
-    background: #d45745;
-    border-radius: 0 0 20px 20px;
-    animation: mouthSmile 1.5s ease-in-out infinite;
-}
-
-@keyframes mouthSmile {
-    0%, 100% { transform: scaleY(1); }
-    50% { transform: scaleY(1.2); }
-}
-
-@keyframes headBob {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(-10px); }
-}
-
-.boy-body {
-    position: absolute;
-    top: 115px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70px;
-    height: 90px;
-    background: linear-gradient(135deg, #3498db, #2980b9);
-    border-radius: 15px 15px 10px 10px;
-    box-shadow: inset -3px 3px 8px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.3);
-    animation: bodyBob 0.6s ease-in-out infinite;
-}
-
-.boy-chest {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 30px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.2);
-}
-
-@keyframes bodyBob {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(-8px); }
-}
-
-.boy-arm {
-    position: absolute;
-    width: 20px;
-    height: 65px;
-    background: linear-gradient(90deg, #f4a261 60%, #3498db 60%);
-    border-radius: 10px;
-    top: 125px;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.boy-arm.left-arm {
-    left: 10px;
-    transform-origin: top center;
-    animation: leftArmWave 1s ease-in-out infinite;
-}
-
-.boy-arm.right-arm {
-    right: 10px;
-    transform-origin: top center;
-    animation: rightArmWave 1s ease-in-out infinite;
-}
-
-@keyframes leftArmWave {
-    0% { transform: rotateZ(-20deg); }
-    25% { transform: rotateZ(45deg); }
-    50% { transform: rotateZ(60deg); }
-    75% { transform: rotateZ(30deg); }
-    100% { transform: rotateZ(-20deg); }
-}
-
-@keyframes rightArmWave {
-    0% { transform: rotateZ(20deg); }
-    25% { transform: rotateZ(-45deg); }
-    50% { transform: rotateZ(-60deg); }
-    75% { transform: rotateZ(-30deg); }
-    100% { transform: rotateZ(20deg); }
-}
-
-.boy-leg {
-    position: absolute;
-    width: 18px;
-    height: 70px;
-    background: linear-gradient(90deg, #2c3e50 40%, #34495e 60%);
-    border-radius: 10px 10px 5px 5px;
-    top: 200px;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.boy-leg.left-leg {
-    left: 48px;
-    animation: leftLegWalk 0.8s ease-in-out infinite;
-}
-
-.boy-leg.right-leg {
-    right: 48px;
-    animation: rightLegWalk 0.8s ease-in-out infinite;
-}
-
-@keyframes leftLegWalk {
-    0%, 100% { transform: rotateZ(-10deg); }
-    25% { transform: rotateZ(20deg); }
-    75% { transform: rotateZ(-25deg); }
-}
-
-@keyframes rightLegWalk {
-    0%, 100% { transform: rotateZ(10deg); }
-    25% { transform: rotateZ(-25deg); }
-    75% { transform: rotateZ(20deg); }
-}
-
-@keyframes boyFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-}
-
-.boy-arm::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 14px;
-    height: 18px;
-    background: linear-gradient(135deg, #f4a261, #e76f51);
-    border-radius: 50% 50% 40% 40%;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.boy-leg::after {
-    content: '';
-    position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 14px;
-    height: 16px;
-    background: #e74c3c;
-    border-radius: 5px 5px 3px 3px;
-}
-
-/* Intense wave animation when boy is clicked */
-.animated-boy.wave-intense .boy-arm.right-arm {
-    animation: waveIntense 0.6s ease-in-out !important;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-30px) rotate(5deg); }
-}
-
-@keyframes shine {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
 
 @keyframes fadeInUp {
     from {
-        opacity: 0;
-        transform: translateY(30px);
+        opacity: 1;
+        transform: translateY(0);
     }
     to {
         opacity: 1;
@@ -609,8 +334,8 @@ body {
 
 @keyframes fadeInRight {
     from {
-        opacity: 0;
-        transform: translateX(30px);
+        opacity: 1;
+        transform: translateX(0);
     }
     to {
         opacity: 1;
@@ -645,35 +370,15 @@ body {
     background: var(--primary-color);
     border-radius: 50%;
     transform: translateX(-50%);
-    animation: scroll 2s infinite;
 }
 
-@keyframes scroll {
-    0% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(20px);
-    }
-}
-
-/* Boy Eye Blink Animation */
 @keyframes eyeBlink {
     0% { height: 20px; }
     50% { height: 2px; }
     100% { height: 20px; }
 }
 
-/* Intense Wave Animation */
-@keyframes waveIntense {
-    0% { transform: rotateZ(-30deg); }
-    25% { transform: rotateZ(60deg); }
-    50% { transform: rotateZ(70deg); }
-    75% { transform: rotateZ(40deg); }
-    100% { transform: rotateZ(-30deg); }
-}
+/* Removed intense wave animation */
 
 /* ===== ABOUT SECTION ===== */
 .about {
@@ -710,8 +415,8 @@ body {
 
 @keyframes fadeInLeft {
     from {
-        opacity: 0;
-        transform: translateX(-30px);
+        opacity: 1;
+        transform: translateX(0);
     }
     to {
         opacity: 1;
@@ -835,15 +540,7 @@ body {
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    animation: fadeInUp 0.8s ease-out both;
 }
-
-.skill-card:nth-child(1) { animation-delay: 0s; }
-.skill-card:nth-child(2) { animation-delay: 0.1s; }
-.skill-card:nth-child(3) { animation-delay: 0.2s; }
-.skill-card:nth-child(4) { animation-delay: 0.3s; }
-.skill-card:nth-child(5) { animation-delay: 0.4s; }
-.skill-card:nth-child(6) { animation-delay: 0.5s; }
 
 .skill-card::before {
     content: '';
@@ -869,19 +566,6 @@ body {
 .skill-icon {
     font-size: 50px;
     margin-bottom: 20px;
-    animation: bounce 2s ease-in-out infinite;
-}
-
-.skill-card:nth-child(1) .skill-icon { animation-delay: 0s; }
-.skill-card:nth-child(2) .skill-icon { animation-delay: 0.2s; }
-.skill-card:nth-child(3) .skill-icon { animation-delay: 0.4s; }
-.skill-card:nth-child(4) .skill-icon { animation-delay: 0.6s; }
-.skill-card:nth-child(5) .skill-icon { animation-delay: 0.8s; }
-.skill-card:nth-child(6) .skill-icon { animation-delay: 1s; }
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
 }
 
 .skill-card h3 {
@@ -917,15 +601,7 @@ body {
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    animation: fadeInUp 0.8s ease-out both;
 }
-
-.project-card:nth-child(1) { animation-delay: 0s; }
-.project-card:nth-child(2) { animation-delay: 0.1s; }
-.project-card:nth-child(3) { animation-delay: 0.2s; }
-.project-card:nth-child(4) { animation-delay: 0.3s; }
-.project-card:nth-child(5) { animation-delay: 0.4s; }
-.project-card:nth-child(6) { animation-delay: 0.5s; }
 
 .project-card::before {
     content: '';
@@ -952,15 +628,7 @@ body {
     font-size: 60px;
     margin-bottom: 20px;
     display: inline-block;
-    animation: float 3s ease-in-out infinite;
 }
-
-.project-card:nth-child(1) .project-image { animation-delay: 0s; }
-.project-card:nth-child(2) .project-image { animation-delay: 0.3s; }
-.project-card:nth-child(3) .project-image { animation-delay: 0.6s; }
-.project-card:nth-child(4) .project-image { animation-delay: 0.9s; }
-.project-card:nth-child(5) .project-image { animation-delay: 1.2s; }
-.project-card:nth-child(6) .project-image { animation-delay: 1.5s; }
 
 .project-card h3 {
     font-size: 20px;
